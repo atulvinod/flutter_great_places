@@ -34,6 +34,7 @@ class PlacesListScreen extends StatelessWidget {
                           backgroundImage: FileImage(values.items[index].image),
                         ),
                         title: Text(values.items[index].title),
+                        subtitle: Text(values.items[index].location!.address!),
                       ),
                     ),
                   ),

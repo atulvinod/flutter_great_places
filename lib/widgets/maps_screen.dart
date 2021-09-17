@@ -41,7 +41,7 @@ class _MapsScreenWidgetState extends State<MapsScreenWidget> {
         initialCameraPosition: CameraPosition(
           zoom: 16,
           target:
-              LatLng(widget.initialLocation.lat, widget.initialLocation.long),
+              LatLng(widget.initialLocation.lat, widget.initialLocation.lng),
         ),
         onTap: widget.isSelecting ? _selectLocation : null,
         markers: _pickedLocation == null

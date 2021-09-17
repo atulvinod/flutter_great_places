@@ -6,7 +6,8 @@ import 'package:nativefeatues/helpers/location_helper.dart';
 import 'package:nativefeatues/widgets/maps_screen.dart';
 
 class LocationInputWidget extends StatefulWidget {
-  const LocationInputWidget({Key? key}) : super(key: key);
+  final Function(double, double)? onSelectPlace;
+  const LocationInputWidget({this.onSelectPlace, Key? key}) : super(key: key);
 
   @override
   _LocationInputWidgetState createState() => _LocationInputWidgetState();
@@ -15,16 +16,22 @@ class LocationInputWidget extends StatefulWidget {
 class _LocationInputWidgetState extends State<LocationInputWidget> {
   String? _previewImageUrl;
 
-  //TODO: Do the Android gradle configuration
-  // Google account billing is required to use the Maps API
-  Future<void> _getCurrentLocation() async {
-    final locData = await Location().getLocation();
-    final previewImageUrl = LocationHelper.generateLocationPreviewImage(
-        locData.latitude!, locData.longitude!);
+  void _showPreview(double lat, double lng) {
+    final previewImageUrl =
+        LocationHelper.generateLocationPreviewImage(lat, lng);
 
     setState(() {
       _previewImageUrl = previewImageUrl;
     });
+  }
+
+  //TODO: Do the Android gradle configuration
+  // Google account billing is required to use the Maps API
+  Future<void> _getCurrentLocation() async {
+    final locData = await Location().getLocation();
+    if (locData != null) {
+      _showPreview(locData!.latitude!, locData!.longitude!);
+    }
   }
 
   _selectOnMap() async {
@@ -39,6 +46,12 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
 
     if (selectedLocation == null) {
       return;
+    }
+
+    if (widget.onSelectPlace != null) {
+      _showPreview(selectedLocation.latitude, selectedLocation.longitude);
+      widget.onSelectPlace!(
+          selectedLocation.latitude, selectedLocation.longitude);
     }
   }
 

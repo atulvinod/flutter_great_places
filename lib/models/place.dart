@@ -14,8 +14,8 @@ class Place {
 
 class PlaceLocation {
   final double lat;
-  final double long;
-  final String address;
+  final double lng;
+  final String? address;
 
-  const PlaceLocation(this.lat, this.long, this.address);
+  const PlaceLocation(this.lat, this.lng, this.address);
 }

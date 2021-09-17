@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nativefeatues/provider/great_places.dart';
+import 'package:nativefeatues/screens/add_place_screen.dart';
+import 'package:nativefeatues/screens/places_list_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,10 +15,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => GreatPlaces(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Great Places',
         theme:
             ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.amber),
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
+        home: PlacesListScreen(),
+        routes: {AddPlaceScreen.routeName: (_) => AddPlaceScreen()},
       ),
     );
   }

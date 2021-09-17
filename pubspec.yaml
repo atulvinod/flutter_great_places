@@ -24,6 +24,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  #To help us get image form camera or gallery
+  image_picker: ^0.6.0+9
+  #path helps us to manupliate paths with respect to the OS we are using
+  path: ^1.8.0
+  #path_provider helps us to determine where we can store the files in a particular OS
+  path_provider: ^2.0.4
   provider: ^6.0.0
 
 dev_dependencies:

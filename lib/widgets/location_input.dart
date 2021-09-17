@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:nativefeatues/helpers/location_helper.dart';
+import 'package:nativefeatues/widgets/maps_screen.dart';
 
 class LocationInputWidget extends StatefulWidget {
   const LocationInputWidget({Key? key}) : super(key: key);
@@ -23,6 +25,21 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
     setState(() {
       _previewImageUrl = previewImageUrl;
     });
+  }
+
+  _selectOnMap() async {
+    final selectedLocation = await Navigator.of(context).push<LatLng?>(
+      MaterialPageRoute(
+          // To show the cross icon instead of back
+          fullscreenDialog: true,
+          builder: (_) => MapsScreenWidget(
+                isSelecting: true,
+              )),
+    );
+
+    if (selectedLocation == null) {
+      return;
+    }
   }
 
   @override
@@ -56,7 +73,7 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
             ),
             FlatButton.icon(
               label: Text('Select on map'),
-              onPressed: () {},
+              onPressed: _selectOnMap,
               icon: Icon(Icons.map),
               textColor: Theme.of(context).primaryColor,
             )

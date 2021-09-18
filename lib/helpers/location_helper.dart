@@ -12,7 +12,7 @@ class LocationHelper {
   }
 
   static Future<String> getPlaceAddress(double lat, double lng) async {
-    final googleGeoCodingUrl = '';
+    final googleGeoCodingUrl = '-- Geocoding Url -- ';
     final response = await http.get(Uri.parse(googleGeoCodingUrl));
     return json.decode(response.body)['results'][0]['formatted_address'];
   }

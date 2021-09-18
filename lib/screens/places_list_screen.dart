@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nativefeatues/provider/great_places.dart';
 import 'package:nativefeatues/screens/add_place_screen.dart';
+import 'package:nativefeatues/screens/places_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -30,6 +31,11 @@ class PlacesListScreen extends StatelessWidget {
                     child: Text('Got no places yet! Add some'),
                     builder: (ctx, values, child) => ListView.builder(
                       itemBuilder: (ctx, index) => ListTile(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              PlaceDetailScreen.routeName,
+                              arguments: values.items[index].id);
+                        },
                         leading: CircleAvatar(
                           backgroundImage: FileImage(values.items[index].image),
                         ),

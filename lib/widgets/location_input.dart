@@ -39,7 +39,7 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
       MaterialPageRoute(
           // To show the cross icon instead of back
           fullscreenDialog: true,
-          builder: (_) => MapsScreenWidget(
+          builder: (_) => MapScreen(
                 isSelecting: true,
               )),
     );

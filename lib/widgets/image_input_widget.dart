@@ -16,9 +16,8 @@ class ImageInputWidget extends StatefulWidget {
 class _ImageInputWidgetState extends State<ImageInputWidget> {
   File? _storedImage;
   _takePicture() async {
-    final picker = ImagePicker();
     final imageFile =
-        await picker.getImage(source: ImageSource.camera, maxWidth: 600);
+        await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 600);
     if (imageFile.path.isEmpty) {
       return;
     }

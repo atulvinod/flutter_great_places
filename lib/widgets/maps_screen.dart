@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nativefeatues/models/place.dart';
 
-class MapsScreenWidget extends StatefulWidget {
+class MapScreen extends StatefulWidget {
   final PlaceLocation initialLocation;
   final bool isSelecting;
-  const MapsScreenWidget(
+  const MapScreen(
       {this.initialLocation = const PlaceLocation(37.422, -144, "Google plex"),
       Key? key,
       // Determines if we are in readonly mode or selecting mode
@@ -13,10 +13,10 @@ class MapsScreenWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _MapsScreenWidgetState createState() => _MapsScreenWidgetState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapsScreenWidgetState extends State<MapsScreenWidget> {
+class _MapScreenState extends State<MapScreen> {
   LatLng? _pickedLocation;
   void _selectLocation(LatLng position) {
     setState(() {
@@ -44,12 +44,14 @@ class _MapsScreenWidgetState extends State<MapsScreenWidget> {
               LatLng(widget.initialLocation.lat, widget.initialLocation.lng),
         ),
         onTap: widget.isSelecting ? _selectLocation : null,
-        markers: _pickedLocation == null
+        markers: _pickedLocation == null && widget.isSelecting
             ? {}
             : {
                 Marker(
                     markerId: MarkerId(DateTime.now().toIso8601String()),
-                    position: _pickedLocation!)
+                    position: _pickedLocation ??
+                        LatLng(widget.initialLocation.lat,
+                            widget.initialLocation.lng))
               },
       ),
     );

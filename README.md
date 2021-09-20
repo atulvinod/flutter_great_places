@@ -1,6 +1,6 @@
-# nativefeatues
+# Flutter Great places
 
-A new Flutter project.
+A project to learn native device features such as camera input, sqflite etc
 
 ## Getting Started
 
